@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:17
+    container_name: mechanic_system_db
+    # restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: mechanicsystem
+    
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+      - pg_data:/var/lib/postgresql/data
+
+
+volumes:
+  pg_data:
