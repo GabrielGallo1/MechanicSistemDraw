@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: .
+    container_name: mechanic_backend
+    ports:
+      - "3333:3333"
+    environment:
+      DATABASE_URL=postgresql://postgres:1234@mechanic_system_db:5432/mechanicsystem
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - mechanic_network
+
+networks:
+  mechanic_network:
+    external: true
