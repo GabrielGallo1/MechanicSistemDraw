@@ -1,5 +1,5 @@
 generator client {
-   provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -17,6 +17,7 @@ model client {
   car      car[]
   truck    truck[]
 
+  @@map("client")
   @@schema("public")
 }
 
@@ -28,7 +29,32 @@ model mechanic {
   satuslegal Boolean?     @default(true)
   workorders workorders[]
 
+  @@map("mechanic")
   @@schema("public")
+}
+
+model car {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  model        String  @db.Char(50)
+  year         Int?
+  licenseplate String  @unique @db.Char(7)
+  idcliente    String? @db.Uuid
+  client       client? @relation(fields: [idcliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("car")
+  @@schema("vehicles")
+}
+
+model truck {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  model        String  @db.Char(50)
+  year         Int?
+  licenseplate String  @unique @db.Char(7)
+  idcliente    String? @db.Uuid
+  client       client? @relation(fields: [idcliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("truck")
+  @@schema("vehicles")
 }
 
 model workorders {
@@ -42,26 +68,4 @@ model workorders {
   mechanic     mechanic? @relation(fields: [idmechanic], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@schema("public")
-}
-
-model car {
-  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  model        String  @db.Char(50)
-  year         Int?
-  licenseplate String  @unique @db.Char(7)
-  idcliente    String? @db.Uuid
-  client       client? @relation(fields: [idcliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@schema("vehicles")
-}
-
-model truck {
-  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  model        String  @db.Char(50)
-  year         Int?
-  licenseplate String  @unique @db.Char(7)
-  idcliente    String? @db.Uuid
-  client       client? @relation(fields: [idcliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@schema("vehicles")
 }
