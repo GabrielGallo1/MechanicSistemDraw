@@ -1,0 +1,419 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "mechanicsystemAPI",
+    "version" : "1.0.0",
+    "description" : "API for a mechanical workshop system"
+  },
+  "basePath" : "/v1",
+  "schemes" : [ "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/clients" : {
+      "get" : {
+        "summary" : "list all clients",
+        "operationId" : "clients_list",
+        "responses" : {
+          "200" : {
+            "description" : "success",
+            "schema" : {
+              "$ref" : "#/definitions/clientListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "register a new client",
+        "operationId" : "client_create",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/Client"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "created",
+            "schema" : {
+              "$ref" : "#/definitions/Client"
+            }
+          }
+        }
+      }
+    },
+    "/clients/{id}" : {
+      "get" : {
+        "summary" : "get client by ID",
+        "operationId" : "client_get",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success",
+            "schema" : {
+              "$ref" : "#/definitions/Client"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update client",
+        "operationId" : "client_update",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/Client"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "updated",
+            "schema" : {
+              "$ref" : "#/definitions/Client"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete client",
+        "operationId" : "client_delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "deleted"
+          }
+        }
+      }
+    },
+    "/mechanics" : {
+      "get" : {
+        "summary" : "list all mechanics",
+        "operationId" : "mechanics_list",
+        "responses" : {
+          "200" : {
+            "description" : "success",
+            "schema" : {
+              "$ref" : "#/definitions/mechanicListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "register mechanic",
+        "operationId" : "mechanic_create",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/mechanic"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "created",
+            "schema" : {
+              "$ref" : "#/definitions/mechanic"
+            }
+          }
+        }
+      }
+    },
+    "/mechanics/{id}" : {
+      "get" : {
+        "summary" : "get mechanic by ID",
+        "operationId" : "mechanic_get",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success",
+            "schema" : {
+              "$ref" : "#/definitions/mechanic"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update mechanic",
+        "operationId" : "mechanic_update",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/mechanic"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "updated",
+            "schema" : {
+              "$ref" : "#/definitions/mechanic"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete mechanic",
+        "operationId" : "mechanic_delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "deleted"
+          }
+        }
+      }
+    },
+    "/workorders" : {
+      "get" : {
+        "summary" : "list all workorders",
+        "operationId" : "workorders_list",
+        "responses" : {
+          "200" : {
+            "description" : "success",
+            "schema" : {
+              "$ref" : "#/definitions/workorderListResponse"
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "register workorder",
+        "operationId" : "workorder_create",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/workorder"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "created",
+            "schema" : {
+              "$ref" : "#/definitions/workorder"
+            }
+          }
+        }
+      }
+    },
+    "/workorders/{id}" : {
+      "get" : {
+        "summary" : "get workorder by ID",
+        "operationId" : "workorder_get",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success",
+            "schema" : {
+              "$ref" : "#/definitions/workorder"
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update workorder",
+        "operationId" : "workorder_update",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "schema" : {
+            "$ref" : "#/definitions/workorder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "updated",
+            "schema" : {
+              "$ref" : "#/definitions/workorder"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete workorder",
+        "operationId" : "workorder_delete",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "deleted"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Client" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "contact" : {
+          "type" : "string"
+        },
+        "adress" : {
+          "type" : "string"
+        },
+        "vehicle" : {
+          "$ref" : "#/definitions/vehicle"
+        }
+      }
+    },
+    "vehicle" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "type" : {
+          "type" : "string",
+          "enum" : [ "car", "truck", "motorcycle" ]
+        },
+        "plate" : {
+          "type" : "string"
+        },
+        "model" : {
+          "type" : "string"
+        },
+        "year" : {
+          "type" : "integer"
+        },
+        "workorders" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/workorder"
+          }
+        }
+      }
+    },
+    "mechanic" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "document" : {
+          "type" : "string"
+        },
+        "contact" : {
+          "type" : "string"
+        },
+        "legalstatus" : {
+          "type" : "string"
+        }
+      }
+    },
+    "workorder" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string",
+          "enum" : [ "canceled", "in_progress", "completed" ]
+        },
+        "vehicleId" : {
+          "type" : "string",
+          "format" : "uuid"
+        },
+        "mechanicId" : {
+          "type" : "string",
+          "format" : "uuid"
+        }
+      }
+    },
+    "clientListResponse" : {
+      "type" : "object",
+      "properties" : {
+        "clients" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Client"
+          }
+        }
+      }
+    },
+    "mechanicListResponse" : {
+      "type" : "object",
+      "properties" : {
+        "mechanics" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/mechanic"
+          }
+        }
+      }
+    },
+    "workorderListResponse" : {
+      "type" : "object",
+      "properties" : {
+        "workorders" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/workorder"
+          }
+        }
+      }
+    }
+  }
+}
