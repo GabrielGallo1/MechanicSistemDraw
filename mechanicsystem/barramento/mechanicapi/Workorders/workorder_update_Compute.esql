@@ -1,0 +1,30 @@
+BROKER SCHEMA Workorders
+
+
+CREATE COMPUTE MODULE workorder_update_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+    DECLARE id CHARACTER InputLocalEnvironment.REST.Input.Parameters.id;
+    DECLARE vehicle_type CHARACTER InputRoot.JSON.Data.vehicle_type;
+    DECLARE idvehicle CHARACTER InputRoot.JSON.Data.idvehicle;
+    DECLARE idmechanic CHARACTER InputRoot.JSON.Data.idmechanic;
+    DECLARE idclient CHARACTER InputRoot.JSON.Data.idclient;
+    DECLARE services CHARACTER InputRoot.JSON.Data.services;
+    DECLARE status CHARACTER InputRoot.JSON.Data.status;
+
+    SET OutputLocalEnvironment.Destination.HTTP.RequestURL =
+      'http://localhost:3333/workorders/' || id;
+
+    SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'PUT';
+
+    CREATE FIELD OutputRoot.JSON.Data;
+    SET OutputRoot.JSON.Data.vehicle_type = vehicle_type;
+    SET OutputRoot.JSON.Data.idvehicle = idvehicle;
+    SET OutputRoot.JSON.Data.idmechanic = idmechanic;
+    SET OutputRoot.JSON.Data.idclient = idclient;
+    SET OutputRoot.JSON.Data.services = services;
+    SET OutputRoot.JSON.Data.status = status;
+
+    RETURN TRUE;
+	END;
+END MODULE;

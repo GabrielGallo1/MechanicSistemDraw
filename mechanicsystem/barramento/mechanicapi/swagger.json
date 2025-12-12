@@ -221,7 +221,7 @@
           "201" : {
             "description" : "created",
             "schema" : {
-              "$ref" : "#/definitions/workorder"
+              "$ref" : "#/definitions/Client"
             }
           }
         }

@@ -1,0 +1,16 @@
+BROKER SCHEMA Workorders
+
+
+CREATE COMPUTE MODULE workorder_get_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+    DECLARE id CHARACTER InputLocalEnvironment.REST.Input.Parameters.id;
+
+    SET OutputLocalEnvironment.Destination.HTTP.RequestURL =
+      'http://localhost:3333/workorders/' || id;
+
+    SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'GET';
+
+    RETURN TRUE;
+	END;
+END MODULE;

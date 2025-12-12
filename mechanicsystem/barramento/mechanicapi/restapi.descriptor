@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:restapiDescriptor xmlns="http://com.ibm.etools.mft.descriptor.base" xmlns:ns2="http://com.ibm.etools.mft.descriptor.restapi" definitionType="swagger_20" definitionFile="swagger.json" implementation="gen/mechanicapi.msgflow" https="false" definitionWithExtRef="false" faultFormat="JSON">
     <ns2:operations>
+        <ns2:operation name="client_create" implementation="client_create.subflow"/>
+        <ns2:operation name="client_delete" implementation="client_delete.subflow"/>
+        <ns2:operation name="client_get" implementation="client_get.subflow"/>
+        <ns2:operation name="client_update" implementation="client_update.subflow"/>
         <ns2:operation name="clients_list" implementation="clients_list.subflow"/>
+        <ns2:operation name="mechanic_create" implementation="mechanic_create.subflow"/>
+        <ns2:operation name="mechanic_delete" implementation="mechanic_delete.subflow"/>
+        <ns2:operation name="mechanic_get" implementation="mechanic_get.subflow"/>
+        <ns2:operation name="mechanic_update" implementation="mechanic_update.subflow"/>
+        <ns2:operation name="mechanics_list" implementation="mechanics_list.subflow"/>
+        <ns2:operation name="workorder_create" implementation="workorder_create.subflow"/>
+        <ns2:operation name="workorder_delete" implementation="workorder_delete.subflow"/>
+        <ns2:operation name="workorder_get" implementation="workorder_get.subflow"/>
+        <ns2:operation name="workorder_update" implementation="workorder_update.subflow"/>
+        <ns2:operation name="workorders_list" implementation="workorders_list.subflow"/>
     </ns2:operations>
     <ns2:errorHandlers/>
 </ns2:restapiDescriptor>

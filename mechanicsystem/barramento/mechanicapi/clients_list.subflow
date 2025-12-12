@@ -9,10 +9,10 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input_1" location="10,25">
         <translation xmi:type="utility:TranslatableString" key="Input" bundleName="clients_list" pluginId="mechanicapi"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output_1" location="743,28">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output_1" location="706,25">
         <translation xmi:type="utility:TranslatableString" key="Output" bundleName="clients_list" pluginId="mechanicapi"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="222,25" computeExpression="esql://routine/#clients_list_Compute.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="222,25" computeExpression="esql://routine/Client#clients_list_Compute.Main" computeMode="destination">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
       <nodes xmi:type="ComIbmWSRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="480,26" URLSpecifier="http://localhost:3333/clients" httpMethod="GET" httpVersion="1.1" protocol="TLS">
@@ -20,7 +20,7 @@
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="OutTerminal.Output_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="OutTerminal.Output_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

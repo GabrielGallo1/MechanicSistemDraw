@@ -1,0 +1,24 @@
+BROKER SCHEMA Mechanic
+
+CREATE COMPUTE MODULE mechanic_update_Compute
+  CREATE FUNCTION Main() RETURNS BOOLEAN
+  BEGIN
+    DECLARE id          CHARACTER InputLocalEnvironment.REST.Input.Parameters.id;
+    DECLARE name        CHARACTER InputRoot.JSON.Data.name;
+    DECLARE document    CHARACTER InputRoot.JSON.Data.document;
+    DECLARE contact     CHARACTER InputRoot.JSON.Data.contact;
+    DECLARE satuslegal  BOOLEAN   InputRoot.JSON.Data.satuslegal;
+
+    SET OutputLocalEnvironment.Destination.HTTP.RequestURL =
+      'http://localhost:3333/mechanics/' || id;
+
+    SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method = 'PUT';
+
+    SET OutputRoot.JSON.Data.name       = name;
+    SET OutputRoot.JSON.Data.document   = document;
+    SET OutputRoot.JSON.Data.contact    = contact;
+    SET OutputRoot.JSON.Data.satuslegal = satuslegal;
+
+    RETURN TRUE;
+  END;
+END MODULE;

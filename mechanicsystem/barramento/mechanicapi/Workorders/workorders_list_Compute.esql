@@ -1,0 +1,22 @@
+BROKER SCHEMA Workorders
+
+
+CREATE COMPUTE MODULE workorders_list_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+    -- 1. Definir o recurso do backend que queremos acessar
+    -- Pode ser 'clients', 'mechanics', 'workorders', 'vehicles'
+    DECLARE resource CHARACTER 'workorders';
+
+    -- 2. Montar a URL completa do backend
+    -- http://localhost:3333/clients
+    -- Essa URL será usada pelo HTTPRequest node
+    SET OutputLocalEnvironment.Destination.HTTP.RequestURL =
+        'http://localhost:3333/' || resource;
+
+    -- 3. Definir o método HTTP que será usado
+    -- Copiamos o método recebido pelo HTTPInput (GET, POST, DELETE)
+    SET OutputLocalEnvironment.Destination.HTTP.RequestLine.Method =
+        InputLocalEnvironment.HTTP.Input.Method;
+	END;
+END MODULE;

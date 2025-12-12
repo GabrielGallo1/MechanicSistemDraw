@@ -16,6 +16,7 @@ model client {
   address  String? @db.Char(100)
   car      car[]
   truck    truck[]
+  workorders workorders[] @relation("ClientWorkorders")
 
   @@map("client")
   @@schema("public")
@@ -27,7 +28,7 @@ model mechanic {
   document   String       @unique @db.Char(11)
   contact    String       @unique @db.Char(9)
   satuslegal Boolean?     @default(true)
-  workorders workorders[]
+  workorders workorders[] @relation("MechanicWorkorders")
 
   @@map("mechanic")
   @@schema("public")
@@ -39,7 +40,7 @@ model car {
   year         Int?
   licenseplate String  @unique @db.Char(7)
   idcliente    String? @db.Uuid
-  client       client? @relation(fields: [idcliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  client       client? @relation(fields: [idcliente], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("car")
   @@schema("vehicles")
@@ -51,7 +52,7 @@ model truck {
   year         Int?
   licenseplate String  @unique @db.Char(7)
   idcliente    String? @db.Uuid
-  client       client? @relation(fields: [idcliente], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  client       client? @relation(fields: [idcliente], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("truck")
   @@schema("vehicles")
@@ -61,11 +62,16 @@ model workorders {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   vehicle_type String    @db.VarChar(10)
   idvehicle    String    @db.Uuid
+
   idmechanic   String?   @db.Uuid
+  mechanic     mechanic? @relation("MechanicWorkorders", fields: [idmechanic], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  idclient     String?   @db.Uuid
+  client       client?   @relation("ClientWorkorders", fields: [idclient], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
   services     String?   @db.Char(255)
   timeexecute  DateTime? @default(now()) @db.Timestamp(6)
   status       String?   @db.Char(20)
-  mechanic     mechanic? @relation(fields: [idmechanic], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@schema("public")
 }
