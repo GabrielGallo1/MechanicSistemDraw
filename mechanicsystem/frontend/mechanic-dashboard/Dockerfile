@@ -1,6 +1,6 @@
-# ========================
-# ETAPA 1 - BUILD
-# ========================
+# =========================
+# BUILD DO FRONTEND
+# =========================
 FROM node:20-alpine AS build
 
 WORKDIR /app
@@ -9,22 +9,25 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copia o restante do projeto
+# Copia o código
 COPY . .
 
-# Build do Vite
+# Build de produção (Vite)
 RUN npm run build
 
 
-# ========================
-# ETAPA 2 - SERVE (NGINX)
-# ========================
+# =========================
+# SERVE COM NGINX
+# =========================
 FROM nginx:alpine
 
-# Configuração do nginx
+# Remove config padrão
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Configuração customizada
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Arquivos gerados pelo Vite
+# Copia build final
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
