@@ -5,6 +5,7 @@ main{
   background-image:  url('../images/backgroundImage.png');
   display: flex;
   align-items: center;
+  z-index: -1;
 }
 
 .container{

@@ -1,13 +1,19 @@
-import Background from "./components/background";
-import Modal from "./components/Modal";
+import { useState } from 'react';
+import Background from './components/Background';
+import ModalClient from './components/modals/modalRegisterClient';
 
-function App() { 
+function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
-      <Background />
-      {/* <Modal /> */}
+      <Background onOpenModal={() => setIsModalOpen(true)} />
+
+      {isModalOpen && (
+        <ModalClient onClose={() => setIsModalOpen(false)} />
+      )}
     </>
-  )
+  );
 }
 
 export default App;
